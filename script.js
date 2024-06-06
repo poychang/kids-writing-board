@@ -63,7 +63,6 @@ function draw(e) {
 
     drawingCtx.lineWidth = 5;
     drawingCtx.lineCap = 'round';
-    drawingCtx.strokeStyle = 'black';
 
     drawingCtx.lineTo(x, y);
     drawingCtx.stroke();
@@ -110,6 +109,22 @@ loadImageButton.addEventListener('click', () => {
 
 clearCanvasButton.addEventListener('click', () => {
     drawingCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+});
+
+// 改變筆跡顏色的按鈕事件
+document.getElementById('black').addEventListener('click', () => {
+    drawingCtx.strokeStyle = 'black';
+    console.log('black');
+});
+
+document.getElementById('blue').addEventListener('click', () => {
+    drawingCtx.strokeStyle = 'blue';
+    console.log('blue');
+});
+
+document.getElementById('red').addEventListener('click', () => {
+    drawingCtx.strokeStyle = 'red';
+    console.log('red');
 });
 
 // 在頁面載入完成後載入預設的底圖
