@@ -26,23 +26,34 @@ const clearCanvasButton = document.getElementById('clearCanvas');
 const defaultImageURL = 'default-image.png';
 
 function startPosition(e) {
+    if (e.type === 'touchstart' && (e.touches.length > 1 || e.touches[0].force === 0)) {
+        // 如果是多點觸控或是 Apple Pencil 未接觸時的信號，不處理
+        return;
+    }
     painting = true;
     updateCanvasOffsets();
     draw(e);
 }
 
-function endPosition() {
+function endPosition(e) {
+    if (e.type === 'touchend' && e.touches.length > 0) {
+        // 如果還有其他觸點，不結束繪畫
+        return;
+    }
     painting = false;
     drawingCtx.beginPath();
 }
 
 function draw(e) {
     if (!painting) return;
-
     e.preventDefault();
 
     let x, y;
-    if (e.touches) {
+    if (e.type === 'touchmove') {
+        if (e.touches.length > 1 || e.touches[0].force === 0) {
+            // 如果是多點觸控或是 Apple Pencil 未接觸時的信號，不處理
+            return;
+        }
         x = e.touches[0].clientX - offsetX;
         y = e.touches[0].clientY - offsetY;
     } else {
