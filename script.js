@@ -3,6 +3,13 @@ const drawingCanvas = document.getElementById('drawingCanvas');
 const backgroundCtx = backgroundCanvas.getContext('2d');
 const drawingCtx = drawingCanvas.getContext('2d');
 let painting = false;
+let offsetX, offsetY;
+
+function updateCanvasOffsets() {
+    const rect = drawingCanvas.getBoundingClientRect();
+    offsetX = rect.left;
+    offsetY = rect.top;
+}
 
 drawingCanvas.addEventListener('mousedown', startPosition);
 drawingCanvas.addEventListener('mouseup', endPosition);
@@ -20,6 +27,7 @@ const defaultImageURL = 'default-image.png';
 
 function startPosition(e) {
     painting = true;
+    updateCanvasOffsets();
     draw(e);
 }
 
@@ -35,11 +43,11 @@ function draw(e) {
 
     let x, y;
     if (e.touches) {
-        x = e.touches[0].clientX - drawingCanvas.offsetLeft;
-        y = e.touches[0].clientY - drawingCanvas.offsetTop;
+        x = e.touches[0].clientX - offsetX;
+        y = e.touches[0].clientY - offsetY;
     } else {
-        x = e.clientX - drawingCanvas.offsetLeft;
-        y = e.clientY - drawingCanvas.offsetTop;
+        x = e.clientX - offsetX;
+        y = e.clientY - offsetY;
     }
 
     drawingCtx.lineWidth = 5;
@@ -55,11 +63,25 @@ function draw(e) {
 function loadImage(url) {
     const img = new Image();
     img.onload = () => {
-        backgroundCanvas.width = img.width;
-        backgroundCanvas.height = img.height;
-        drawingCanvas.width = img.width;
-        drawingCanvas.height = img.height;
-        backgroundCtx.drawImage(img, 0, 0, backgroundCanvas.width, backgroundCanvas.height);
+        const maxWidth = window.innerWidth * 0.8; // 讓圖框寬度最多佔視窗的80%
+        const maxHeight = window.innerHeight * 0.8; // 讓圖框高度最多佔視窗的80%
+        let width = img.width;
+        let height = img.height;
+
+        if (width > maxWidth || height > maxHeight) {
+            const widthRatio = maxWidth / width;
+            const heightRatio = maxHeight / height;
+            const ratio = Math.min(widthRatio, heightRatio);
+            width = width * ratio;
+            height = height * ratio;
+        }
+
+        backgroundCanvas.width = width;
+        backgroundCanvas.height = height;
+        drawingCanvas.width = width;
+        drawingCanvas.height = height;
+        backgroundCtx.drawImage(img, 0, 0, width, height);
+        updateCanvasOffsets();
     }
     img.src = url;
 }
