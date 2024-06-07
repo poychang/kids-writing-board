@@ -73,7 +73,7 @@ function draw(e) {
 function loadImage(url) {
     const img = new Image();
     img.onload = () => {
-        const maxWidth = window.innerWidth * 0.8; // 讓圖框寬度最多佔視窗的80%
+        const maxWidth = window.innerWidth * 1.0; // 讓圖框寬度最多佔視窗的90%
         const maxHeight = window.innerHeight * 0.8; // 讓圖框高度最多佔視窗的80%
         let width = img.width;
         let height = img.height;
