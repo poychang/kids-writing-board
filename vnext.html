@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Kids Writing Board</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .canvas-container {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        #backgroundCanvas,
+        #drawingCanvas {
+            border: 1px solid black;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3 class="my-3 text-left">Kids Writing Board</h3>
+        <div class="row justify-content-center mt-2">
+            <div class="col-md-6 align-self-start">
+                <div id="buttons" class="input-group">
+                    <input id="upload" type="file" accept="image/*" class="form-control">
+                    <button id="loadImage" class="input-group-text">Load Image</button>
+                </div>
+            </div>
+            <div class="col-md-6 align-self-end">
+                <div id="buttons" class="text-end">
+                    <button id="black" class="btn btn-dark rounded-circle"><i class="bi bi-pen"></i></button>
+                    <button id="blue" class="btn btn-primary rounded-circle"><i class="bi bi-pen"></i></button>
+                    <button id="red" class="btn btn-danger rounded-circle"><i class="bi bi-pen"></i></button>
+                    <button id="clearCanvas" class="btn btn-outline-danger ml-3">Clear</button>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="canvas-container">
+                    <canvas id="backgroundCanvas"></canvas>
+                    <canvas id="drawingCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
