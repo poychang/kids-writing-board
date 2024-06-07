@@ -23,7 +23,7 @@ const loadImageButton = document.getElementById('loadImage');
 const clearCanvasButton = document.getElementById('clearCanvas');
 
 // 預設底圖的URL
-const defaultImageURL = 'default-image.png';
+const defaultImageURL = './images/default-image.png';
 
 function startPosition(e) {
     if (e.type === 'touchstart' && (e.touches.length > 1 || e.touches[0].force === 0)) {
